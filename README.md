@@ -24,7 +24,6 @@ This folder contains Verilog HDL implementations and verification testbenches fo
 
 ## Folder Structure
 
-```
 day2/
 │
 ├── 2_to_4_decoder/
@@ -42,3 +41,6 @@ day2/
 └── Universal_shift_register/
     ├── design.v
     └── testbench.v
+```
+
+---
