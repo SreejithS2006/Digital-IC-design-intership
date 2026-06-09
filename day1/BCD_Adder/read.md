@@ -1,5 +1,5 @@
 
-Day 1 – BCD Adder Design and Verification
+## Day 1 – BCD Adder Design and Verification
 
 Objective
 
