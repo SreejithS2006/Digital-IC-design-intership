@@ -1,7 +1,7 @@
 
 ## Day 1 – BCD Adder Design and Verification
 
-# Objective
+### Objective
 
 To design and verify a 4-bit Binary Coded Decimal (BCD) Adder using Verilog HDL and simulate its functionality using Vivado.
 
