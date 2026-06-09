@@ -1,5 +1,6 @@
-<img width="1536" height="770" alt="image" src="https://github.com/user-attachments/assets/d69631c1-a0d4-47e5-89d4-da2e6242d8a3" />
+
 Day 1 – BCD Adder Design and Verification
+
 Objective
 
 To design and verify a 4-bit Binary Coded Decimal (BCD) Adder using Verilog HDL and simulate its functionality using Vivado.
