@@ -104,8 +104,7 @@ The BCD Adder consists of:
 
 The RTL schematic generated in Vivado verifies the architecture of the design.
 
-*(Insert RTL Schematic Figure Here)*
-
+<img width="1536" height="770" alt="image" src="https://github.com/user-attachments/assets/8ca86a9f-7d86-430c-93a5-b8ed6f2a0733" />
 ---
 
 ## 6. Verilog Implementation
@@ -170,7 +169,7 @@ Observed Output:
 
 **Result:** PASS
 
-*(Insert Simulation Waveform Figure Here)*
+<img width="1536" height="814" alt="image" src="https://github.com/user-attachments/assets/9d52390d-8fe9-495e-8596-c23b118c533b" />
 
 ---
 
