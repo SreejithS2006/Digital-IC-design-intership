@@ -1,6 +1,6 @@
 # Digital IC Design Internship
 
-This repository contains the Digital Ic internship assignments completed during my Digital IC Design Internship. The projects are implemented in Verilog HDL and verified using testbenches.
+This repository contains the assignments and works  completed during my Digital IC Design Internship. The projects are implemented in Verilog HDL and verified using testbenches.
 
 ## Repository Structure
 
