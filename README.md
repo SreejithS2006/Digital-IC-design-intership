@@ -16,8 +16,9 @@ This repository contains the assignments and works  completed during my Digital 
 - [SR Flip-Flop](./day2/SR_flip_flop/)
 - [Universal Shift Register](./day2/Universal_shift_register/)
 
+
 ## Day 3
 
-- [Sequence Detector 1110](./day3/Sequence_Detector_1110/)
-- [USR](./day3/USR/)
+- [Sequence Detector 1110](./day3/Sequence_Detector1110/)
+- [Task 2](./day3/Task%202/)
 ---
