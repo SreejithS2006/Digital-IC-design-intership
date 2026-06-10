@@ -122,11 +122,7 @@ The synthesized RTL confirms the FSM-based implementation of the sequence detect
 ### RTL Diagram
 
 <img width="850" height="556" alt="WhatsApp Image 2026-06-10 at 4 17 06 PM" src="https://github.com/user-attachments/assets/5d9a9c2a-4355-48aa-86be-2c63b6b0c9e3" />
-<img width="850" height="864" alt="WhatsApp Image 2026-06-10 at 3 50 44 PM" src="https://github.com/user-attachments/assets/8b5e9aae-8239-42b8-bef0-8fb796f28e37" />
 
-
-
----
 
 ## Verilog Implementation
 
@@ -174,6 +170,8 @@ The waveform confirms:
 ### Simulation Waveform
 
 <img width="1600" height="773" alt="WhatsApp Image 2026-06-10 at 3 51 15 PM" src="https://github.com/user-attachments/assets/ca1af8e1-b759-4e4b-ad93-20735a641a02" />
+<img width="1580" height="864" alt="WhatsApp Image 2026-06-10 at 3 50 44 PM" src="https://github.com/user-attachments/assets/26f69cc5-ac6d-4ec1-9d63-4b47934014e6" />
+
 
 
 ---
