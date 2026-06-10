@@ -142,7 +142,8 @@ The RTL confirms that the system is implemented as a multi-module hierarchical d
 
 ### RTL Diagram
 
-<img width="1057" height="557" alt="WhatsApp Image 2026-06-10 at 9 52 13 PM" src="https://github.com/user-attachments/assets/eff463ab-9bde-4ddd-91b4-45ebed092902" />
+<img width="1076" height="558" alt="WhatsApp Image 2026-06-10 at 9 56 06 PM" src="https://github.com/user-attachments/assets/7186710c-ff03-400c-a2d7-b3d7183d3c86" />
+
 
 
 ---
@@ -225,7 +226,8 @@ The output sequence followed FIFO behavior as expected.
 
 ### Simulation Waveform
 
-<img width="1600" height="895" alt="image" src="https://github.com/user-attachments/assets/eae6f5be-c2ee-46e0-996c-990ac37e09cb" />
+<img width="1577" height="815" alt="WhatsApp Image 2026-06-10 at 9 47 52 PM" src="https://github.com/user-attachments/assets/c65416ec-d1f8-4fe6-b555-2c3ef2d90e96" />
+
 
 
 ## Observations
