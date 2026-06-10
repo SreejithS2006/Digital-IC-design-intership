@@ -192,18 +192,4 @@ A **1110 Sequence Detector** was successfully designed, implemented, and verifie
 
 ---
 
-## Tools Used
-
-* Xilinx Vivado
-* Verilog HDL
-
-## Concepts Learned
-
-* Finite State Machines (FSM)
-* Moore State Machine Design
-* Sequence Detection
-* State Transition Logic
-* RTL Analysis
-* Testbench Development
-* Functional Simulation
 
