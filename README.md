@@ -12,12 +12,12 @@ Digital-IC-design-internship/
     ├── BCD_Adder/
     │   ├── Design.v
     │   ├── Testbench.v
-    │   └── bcd.md
+    │   └── read.md
     │
     └── Ripple_Carry_Adder/
         ├── design/
         ├── tb/
-        └── rca.md
+        └── read.md
 # Day 2 - Digital IC Design Internship
 
 This folder contains Verilog HDL implementations and verification testbenches for fundamental combinational and sequential circuits designed during Day 2 of the Digital IC Design Internship.
