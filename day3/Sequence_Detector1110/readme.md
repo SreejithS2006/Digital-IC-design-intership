@@ -94,6 +94,8 @@ The FSM transitions between states according to the input sequence and generates
 ---
 
 ## State Diagram
+<img width="1471" height="922" alt="WhatsApp Image 2026-06-10 at 8 07 49 PM" src="https://github.com/user-attachments/assets/70420fe2-df58-4822-909e-ddf2cd56f375" />
+
 
 ### Sequence: 1110
 
