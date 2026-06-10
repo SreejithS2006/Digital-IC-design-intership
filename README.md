@@ -4,43 +4,20 @@ This repository contains the assignments and works  completed during my Digital 
 
 ## Repository Structure
 
-```
-Digital-IC-design-internship/
-│
-└── day1/
-    │
-    ├── BCD_Adder/
-    │   ├── Design.v
-    │   ├── Testbench.v
-    │   └── read.md
-    │
-    └── Ripple_Carry_Adder/
-        ├── design/
-        ├── tb/
-        └── read.md
-# Day 2 - Digital IC Design Internship
+## Day 1
 
-This folder contains Verilog HDL implementations and verification testbenches for fundamental combinational and sequential circuits designed during Day 2 of the Digital IC Design Internship.
+- [Ripple Carry Adder](./day1/Ripple_Carry_Adder/)
+- [BCD Adder](./day1/BCD_Adder/)
 
-## Folder Structure
+## Day 2
 
-day2/
-│
-├── 2_to_4_decoder/
-│   ├── design.v
-│   └── testbench.v
-│
-├── D_flipflop/
-│   ├── design.v
-│   └── testbench.v
-│
-├── SR_flip_flop/
-│   ├── design.v
-│   └── testbench.v
-│
-└── Universal_shift_register/
-    ├── design.v
-    └── testbench.v
-```
+- [2 to 4 Decoder](./day2/2_to_4_decoder/)
+- [D Flip-Flop](./day2/D_flipflop/)
+- [SR Flip-Flop](./day2/SR_flip_flop/)
+- [Universal Shift Register](./day2/Universal_shift_register/)
 
+## Day 3
+
+- [Sequence Detector 1110](./day3/Sequence_Detector_1110/)
+- [USR](./day3/USR/)
 ---
