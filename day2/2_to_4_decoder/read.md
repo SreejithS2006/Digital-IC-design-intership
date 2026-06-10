@@ -115,7 +115,7 @@ A testbench was developed to verify all possible input combinations.
 | 10    | 0100 (4) |
 | 11    | 1000 (8) |
 
-**Result:** PASS ✅
+**Result:** PASS 
 
 ### Simulation Waveform
 
@@ -140,16 +140,3 @@ A **2-to-4 Decoder** was successfully designed, implemented, and verified using 
 
 ---
 
-## Tools Used
-
-* Xilinx Vivado
-* Verilog HDL
-
-## Concepts Learned
-
-* Combinational Logic Design
-* Decoder Architecture
-* Verilog Case Statements
-* RTL Analysis
-* Functional Simulation
-* Testbench Development
