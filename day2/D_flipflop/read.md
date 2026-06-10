@@ -1,114 +1,106 @@
-# Day 2 – Task 2: SR Flip-Flop Design and Verification
+# Day 2 – Task 3: D Flip-Flop Design and Verification
 
 ## Objective
 
-To design and verify a **Synchronous SR (Set-Reset) Flip-Flop** using Verilog HDL and simulate its functionality using Xilinx Vivado.
+To design and verify a **D (Data) Flip-Flop** using Verilog HDL and simulate its functionality using Xilinx Vivado.
 
 ---
 
 ## Introduction
 
-An **SR Flip-Flop** is one of the fundamental sequential logic circuits used for storing a single bit of data. Unlike combinational circuits, a flip-flop can retain its previous state until a new input or clock event occurs.
+A **D Flip-Flop (Data Flip-Flop)** is a sequential logic circuit used to store a single bit of data. It is one of the most commonly used memory elements in digital systems because it eliminates the invalid state present in the SR Flip-Flop.
 
-The SR Flip-Flop has two control inputs:
+The D Flip-Flop captures the value present at the input **D** on the active edge of the clock and stores it until the next clock event.
 
-* **S (Set)**
-* **R (Reset)**
-
-and two outputs:
-
-* **Q**
-* **Q̅ (Q bar)**
-
-It is widely used in:
+### Applications
 
 * Registers
+* Shift Registers
 * Counters
-* Memory units
-* State machines
-* Digital control systems
+* Memory Units
+* Finite State Machines (FSMs)
+* Digital Control Systems
 
 ---
 
 ## Theory
 
-The SR Flip-Flop changes its state according to the values of the Set and Reset inputs when the active clock edge occurs.
-
-### Truth Table
-
-| S | R | Q(next)     | Q̅(next)     | Operation       |
-| - | - | ----------- | ------------ | --------------- |
-| 0 | 0 | Q(previous) | Q̅(previous) | Hold            |
-| 0 | 1 | 0           | 1            | Reset           |
-| 1 | 0 | 1           | 0            | Set             |
-| 1 | 1 | Invalid     | Invalid      | Forbidden State |
-
----
-
-## Working Principle
-
-### Hold State (S = 0, R = 0)
-
-The flip-flop retains its previous output.
-
-```text
-Q(next) = Q(previous)
-```
-
-### Reset State (S = 0, R = 1)
-
-The output is reset.
-
-```text
-Q = 0
-Q̅ = 1
-```
-
-### Set State (S = 1, R = 0)
-
-The output is set.
-
-```text
-Q = 1
-Q̅ = 0
-```
-
-### Invalid State (S = 1, R = 1)
-
-Both Set and Reset are active simultaneously, resulting in an undefined condition.
-
-```text
-Q = X
-Q̅ = X
-```
-
----
-
-## Design Methodology
-
-The SR Flip-Flop was implemented using Verilog HDL with synchronous clock operation.
+A D Flip-Flop stores one bit of information and updates its output only at the active clock edge.
 
 ### Inputs
 
-| Signal | Description  |
-| ------ | ------------ |
-| clk    | Clock Input  |
-| rst    | Reset Signal |
-| s      | Set Input    |
-| r      | Reset Input  |
+| Signal | Description |
+| ------ | ----------- |
+| D      | Data Input  |
+| CLK    | Clock Input |
+| RST    | Reset Input |
 
 ### Outputs
 
 | Signal | Description       |
 | ------ | ----------------- |
-| q      | Main Output       |
+| Q      | Stored Output     |
+| Q̅     | Complement Output |
+
+### Truth Table
+
+| Clock Edge    | D | Q(next)     | Q̅(next)     |
+| ------------- | - | ----------- | ------------ |
+| ↑             | 0 | 0           | 1            |
+| ↑             | 1 | 1           | 0            |
+| No Clock Edge | X | Q(previous) | Q̅(previous) |
+
+---
+
+## Working Principle
+
+The D Flip-Flop is derived from the SR Flip-Flop by connecting:
+
+* **S = D**
+* **R = D̅**
+
+This arrangement removes the forbidden state that exists in an SR Flip-Flop.
+
+### Operation
+
+* When **D = 1**, the flip-flop enters the Set state and stores logic HIGH.
+* When **D = 0**, the flip-flop enters the Reset state and stores logic LOW.
+* During the active clock edge, the value at D is transferred to Q.
+* Between clock edges, the stored value remains unchanged.
+
+---
+
+## Design Methodology
+
+The D Flip-Flop was implemented using an SR Flip-Flop and an inverter.
+
+### Inputs
+
+| Signal | Description  |
+| ------ | ------------ |
+| clk    | Clock Signal |
+| rst    | Reset Signal |
+| d      | Data Input   |
+
+### Outputs
+
+| Signal | Description       |
+| ------ | ----------------- |
+| q      | Output            |
 | qbar   | Complement Output |
 
-### Functional Description
+### Internal Logic
 
-* On the active edge of the clock, the flip-flop evaluates the values of S and R.
-* Based on the input combination, it performs Set, Reset, Hold, or enters an Invalid state.
-* The reset signal initializes the outputs to a known state.
+The D input is connected directly to the Set input of the SR Flip-Flop.
+
+The complement of D is generated using a NOT gate and connected to the Reset input.
+
+```text
+S = D
+R = D̅
+```
+
+This guarantees that Set and Reset are never active simultaneously.
 
 ---
 
@@ -116,45 +108,49 @@ The SR Flip-Flop was implemented using Verilog HDL with synchronous clock operat
 
 The RTL schematic generated in Vivado shows:
 
-* Two synchronous registers for Q and Q̅.
-* Multiplexer-based control logic.
-* Clock-controlled storage elements.
-* Synchronous reset implementation.
+* One inverter (NOT Gate)
+* One SR Flip-Flop block
+* Clock input
+* Reset input
+* Output ports Q and Q̅
 
-The RTL structure confirms the implementation of a sequential memory element capable of storing one bit of information.
+The inverter generates the complement of D and feeds it to the Reset input of the SR Flip-Flop, thereby implementing a D Flip-Flop.
 
 ### RTL Diagram
 
-<img width="1536" height="1181" alt="image" src="https://github.com/user-attachments/assets/bb9b9440-6b72-47e1-907e-5b44eefa4bb6" />
+<img width="1536" height="786" alt="image" src="https://github.com/user-attachments/assets/bbde2c17-3169-4741-a707-8c1ef0e00e43" />
 
 
 ---
 
 ## Verilog Implementation
 
-The design was implemented using Verilog HDL and modeled as a clocked sequential circuit.
+The design was implemented using Verilog HDL.
 
 ### Features
 
-* Positive-edge triggered operation.
-* Set and Reset functionality.
-* Output retention during Hold condition.
-* Complementary outputs Q and Q̅.
+* Positive-edge triggered operation
+* Data storage capability
+* Reset functionality
+* Complementary outputs
+* No invalid state
+
+The design captures and stores the input data on every active clock edge.
 
 ---
 
 ## Simulation and Verification
 
-A Verilog testbench was developed to verify all operating conditions of the SR Flip-Flop.
+A Verilog testbench was developed to verify the operation of the D Flip-Flop.
 
 ### Test Cases
 
-| S | R | Expected Q | Expected Q̅ | Operation |
-| - | - | ---------- | ----------- | --------- |
-| 0 | 0 | Hold       | Hold        | No Change |
-| 0 | 1 | 0          | 1           | Reset     |
-| 1 | 0 | 1          | 0           | Set       |
-| 1 | 1 | X          | X           | Invalid   |
+| D | Clock Edge | Expected Q |
+| - | ---------- | ---------- |
+| 0 | ↑          | 0          |
+| 1 | ↑          | 1          |
+| 0 | ↑          | 0          |
+| 1 | ↑          | 1          |
 
 ### Sample Observation
 
@@ -162,37 +158,37 @@ From the simulation waveform:
 
 | Signal | Value |
 | ------ | ----- |
-| S      | 1     |
-| R      | 1     |
+| D      | 1     |
 | CLK    | 1     |
-| Q      | X     |
-| Q̅     | X     |
+| RST    | 0     |
+| Q      | 1     |
+| Q̅     | 0     |
 
-The outputs become undefined because both Set and Reset inputs are active simultaneously.
+The output correctly follows the input data at the active clock edge.
 
-**Result:** PASS 
+**Result:** PASS ✅
 
 ### Simulation Waveform
 
-<img width="1536" height="787" alt="image" src="https://github.com/user-attachments/assets/53818f89-f95d-4548-883b-26fdb990d5f7" />
+<img width="1536" height="771" alt="image" src="https://github.com/user-attachments/assets/110689d4-1ff4-4d05-afec-2a33ad2d1e75" />
 
 
 ---
 
 ## Observations
 
-* The flip-flop successfully stored one bit of information.
-* Output changes occurred only at the active clock edge.
-* Set and Reset operations functioned correctly.
-* Hold state preserved the previous output.
-* The forbidden condition (S = R = 1) produced undefined outputs as expected.
-* Simulation results matched the theoretical behavior of an SR Flip-Flop.
+* The output Q follows the value of D on the active clock edge.
+* Q̅ always remains the complement of Q.
+* The invalid state present in the SR Flip-Flop is eliminated.
+* The circuit successfully stores one bit of information.
+* Reset functionality initializes the outputs correctly.
+* Simulation results matched the theoretical behavior.
 
 ---
 
 ## Conclusion
 
-A **Synchronous SR Flip-Flop** was successfully designed, implemented, and verified using Verilog HDL. The simulation results confirmed correct operation under Set, Reset, Hold, and Invalid conditions. RTL analysis verified the hardware implementation, and the assignment provided practical experience in sequential circuit design, memory elements, and clocked digital systems.
+A **D Flip-Flop** was successfully designed, implemented, and verified using Verilog HDL. The simulation results confirmed that the output accurately follows the input data during the active clock edge while retaining the stored value between clock cycles. RTL analysis verified the correctness of the hardware implementation. This task provided practical experience in sequential circuit design, data storage elements, and clocked digital systems.
 
 ---
 
