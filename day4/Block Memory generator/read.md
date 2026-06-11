@@ -351,5 +351,4 @@ A Block Memory Generator (BRAM) was successfully configured, implemented, simula
 ---
 
 
-* Hardware Implementation
 
