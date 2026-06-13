@@ -23,6 +23,8 @@ This repository contains the assignments and works  completed during my Digital 
 - [Task 2](./day3/Task%202/)
   
   ## Day 4
-  - [Block Memory generator](./day4/Block Memory generator/)
+  ### Day 4
+
+- [Block Memory Generator](./day4/Block%20Memory%20generator/)
 
 ---
