@@ -22,7 +22,7 @@ This repository contains the assignments and works  completed during my Digital 
 - [Sequence Detector 1110](./day3/Sequence_Detector1110/)
 - [Task 2](./day3/Task%202/)
   
-  ## Day 4
+## Day 4
  
 
 - [Block Memory Generator](./day4/Block%20Memory%20generator/)
