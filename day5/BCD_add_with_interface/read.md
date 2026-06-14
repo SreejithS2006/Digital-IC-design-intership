@@ -220,7 +220,7 @@ The outputs match the expected BCD arithmetic results.
 
 ### Simulation Waveform
 
-<img width="1600" height="899" alt="image" src="https://github.com/user-attachments/assets/1be7f149-5695-49bb-8c4a-016ce3923c0a" />
+<img width="1600" height="835" alt="image" src="https://github.com/user-attachments/assets/b4d159eb-25f7-4cf9-b1f3-4b8721145ab4" />
 
 
 ---
