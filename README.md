@@ -1,6 +1,6 @@
 # Digital IC Design Internship
 
-This repository contains the assignments and works  completed during my Digital IC Design Internship. The projects are implemented in Verilog HDL and verified using testbenches.
+This repository contains the assignments and work completed during my Digital IC Design Internship. The projects are implemented using Verilog/SystemVerilog HDL and verified through simulation and synthesis using Xilinx Vivado.
 
 ## Repository Structure
 
@@ -9,6 +9,8 @@ This repository contains the assignments and works  completed during my Digital 
 - [Ripple Carry Adder](./day1/Ripple_Carry_Adder/)
 - [BCD Adder](./day1/BCD_Adder/)
 
+---
+
 ## Day 2
 
 - [2 to 4 Decoder](./day2/2_to_4_decoder/)
@@ -16,15 +18,44 @@ This repository contains the assignments and works  completed during my Digital 
 - [SR Flip-Flop](./day2/SR_flip_flop/)
 - [Universal Shift Register](./day2/Universal_shift_register/)
 
+---
 
 ## Day 3
 
-- [Sequence Detector 1110](./day3/Sequence_Detector1110/)
-- [Task 2](./day3/Task%202/)
-  
-## Day 4
- 
+### Task 1
+- [Sequence Detector (1110)](./day3/Sequence_Detector1110/)
 
-- [Block Memory Generator](./day4/Block%20Memory%20generator/)
+### Task 2
+- [FIFO Design with Face Detection Module](./day3/Task%202/)
 
 ---
+
+## Day 4
+
+- [Block Memory Generator (BRAM)](./day4/Block%20Memory%20generator/)
+
+---
+
+## Day 5
+
+### Task 1
+- [BCD Adder Testbench using SystemVerilog Interface](./day5/BCD_add_with_interface/)
+
+### Task 2
+- [FIFO Testbench using SystemVerilog Interface](./day5/FIFO_with_interface/)
+
+---
+
+## Day 6
+
+### Task 1
+- [FIFO Transaction Class using SystemVerilog OOP](./day6/transaction_class_fifo/)
+
+---
+
+
+## Author
+
+**Sreejith S**
+
+Digital IC Design Internship Repository
