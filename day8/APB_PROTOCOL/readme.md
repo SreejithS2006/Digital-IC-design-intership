@@ -157,10 +157,13 @@ The synthesized RTL schematic consists of:
 - Ready Signal Generation
 
 ### RTL Schematic
+<img width="1057" height="470" alt="image" src="https://github.com/user-attachments/assets/1e576b47-8911-4ae5-aca8-94e2b684f845" />
 
-*(Insert RTL Schematic Screenshot Here)*
 
 ---
+
+
+
 
 # Simulation and Verification
 
@@ -232,6 +235,10 @@ PASS ✅
 ---
 
 # Waveform Analysis
+
+
+<img width="1161" height="577" alt="image" src="https://github.com/user-attachments/assets/01c4acd1-5cbb-4901-8114-06ea1985e591" />
+
 
 The simulation waveform shows:
 
