@@ -1,12 +1,11 @@
-
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
 // 
-// Create Date: 21.06.2026 15:46:47
+// Create Date: 22.06.2026 22:57:16
 // Design Name: 
-// Module Name: tb_test3
+// Module Name: tb1
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,10 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
-
-
+`include "CNN.svh"
 
 interface cnn_if;
 
@@ -33,7 +29,7 @@ interface cnn_if;
    // image write interface
    logic wr_en;
    logic [9:0] wr_addr;
-   logic [15:0] wr_data;
+   logic [7:0] wr_data;
 
    logic start;
 
@@ -41,11 +37,11 @@ interface cnn_if;
 
    // classification output
    logic o_valid;
-   logic [31:0] classes [0:9];
+   logic [9:0][31:0] classes;
 
    // weight loader
    logic i_cfg_valid;
-   logic [15:0] i_cfg_data;
+   logic [9:0] i_cfg_data;
    logic [3:0]  i_cfg_layer_sel;
    logic o_cfg_ready;
 
@@ -61,7 +57,7 @@ class transaction;
 
    rand int img_num;
 
-   logic [31:0] classes [0:9];
+  logic signed [9:0][31:0] classes;
 
    constraint c_img {
       img_num inside {[0:9]};
@@ -70,9 +66,9 @@ class transaction;
    string filename;
 
    function void post_randomize();
-      filename =
-      $sformatf("C:/Users/sreej/CNN/mnist_%0d.txt",img_num);
-   endfunction
+   filename =
+  $sformatf("C:\\Users\\sreej\\Downloads\\mnist_files\\mnist_%0d.txt",img_num);
+endfunction
 
 endclass
 
@@ -155,6 +151,9 @@ class driver;
    vif.clk_en <= 1;
 
    wait(vif.rst_n);
+   
+   $display("i_cfg_valid=%0b",vif.i_cfg_valid);
+$display("o_cfg_ready=%0b",vif.o_cfg_ready);
 
    forever begin
 
@@ -189,6 +188,10 @@ class driver;
       $display("[DRV] Start asserted");
 
       wait(vif.o_img_done);
+      $display("o_valid=%0b", vif.o_valid);
+
+for(int i=0;i<10;i++)
+   $display("DRV classes[%0d]=%h", i, vif.classes[i]);
 
       $display("[DRV] CNN processing completed");
 
@@ -227,16 +230,23 @@ class monitor;
 
       @(posedge vif.clk);
 
-      if(vif.o_valid) begin
+    if(vif.o_valid) begin
 
-         trans = new();
+   $display("MONITOR: o_valid detected at %0t", $time);
 
-         for(int i=0;i<10;i++)
-            trans.classes[i] = vif.classes[i];
+   for(int i=0;i<10;i++)
+      $display("MONITOR classes[%0d] = %h", i, vif.classes[i]);
 
-         mon2scb.put(trans);
+   @(posedge vif.clk);
 
-      end
+   trans = new();
+
+   for(int i=0;i<10;i++)
+      trans.classes[i] = vif.classes[i];
+
+   mon2scb.put(trans);
+
+end
 
    end
 
@@ -312,19 +322,20 @@ class scoreboard;
    endfunction
 
    // Find index of maximum class score
-   function int argmax(input logic [31:0] classes [0:9]);
+  function int argmax(
+   input logic signed [9:0][31:0] classes);
 
-      int max_idx = 0;
+   int max_idx;
 
-      for (int i = 1; i < 10; i++) begin
-         if (classes[i] > classes[max_idx])
-            max_idx = i;
-      end
+   max_idx = 0;
 
-      return max_idx;
+   for(int i=1;i<10;i++)
+      if($signed(classes[i]) > $signed(classes[max_idx]))
+         max_idx = i;
 
-   endfunction
+   return max_idx;
 
+endfunction
    task run();
 
       transaction trans;
@@ -336,6 +347,10 @@ class scoreboard;
          exp_mb.get(expected_digit);
          // Get DUT predicted digit
          dut_digit = argmax(trans.classes);
+         $display("Class Scores:");
+for(int i=0;i<10;i++)
+   $display("Class[%0d] = %0d",i,trans.classes[i]);
+
 
          total_count++;
 
@@ -422,8 +437,9 @@ class test;
 
 endclass
 
-module tb_test3;
-
+module tb1;
+    
+    integer weight_count = 0;
    cnn_if vif();
 
    test t;
@@ -452,39 +468,202 @@ module tb_test3;
 
 );
 
-   initial begin
-      vif.clk=0;
-      forever #5 vif.clk=~vif.clk;
-   end
+localparam int R2I_COEF = 32;
 
-   initial begin
-      t=new(vif);
+task automatic load_word(
+   input logic signed [9:0] data,
+   input logic [3:0] layer
+);
 
-      vif.rst_n=0;
+begin
+   weight_count++;    // <-- ADD HERE
+   if(weight_count < 20)
+   $display("[%0t] layer=%0d data=%0d ready=%0b",
+             $time,
+             layer,
+             data,
+             vif.o_cfg_ready);
+   if(weight_count % 1000 == 0)
+      $display("Loaded %0d weights", weight_count);
+      
+   vif.i_cfg_data      = data;
+   vif.i_cfg_layer_sel = layer;
+   vif.i_cfg_valid     = 1;
 
-      repeat(5) @(posedge vif.clk);
+   @(posedge vif.clk);
 
-      vif.rst_n=1;
+   while(!vif.o_cfg_ready)
+      @(posedge vif.clk);
 
-     t.run();  //run start
-   end
-   
-   initial begin
-   vif.i_cfg_valid     = 0;
-   vif.i_cfg_data      = 0;
-   vif.i_cfg_layer_sel = 0;
+   vif.i_cfg_valid = 0;
+
+   @(posedge vif.clk);
+
 end
+
+
+
+endtask
+
+task automatic load_conv1();
+
+integer o,i,r,c;
+
+begin
+
+ $display("[%0t] Loading Conv1",$time);
+
+   for(o=0;o<4;o++)
+      for(i=0;i<1;i++)
+         for(r=0;r<3;r++)
+            for(c=0;c<3;c++)
+               load_word(
+                  $rtoi(kernel_1_re[o][i][r][c]*R2I_COEF),
+                  0
+               );
+
+   for(o=0;o<4;o++)
+      load_word(
+         $rtoi(conv_1_bias_re[o]*R2I_COEF),
+         0
+      );
+
+end
+
+endtask
+
+task automatic load_conv2();
+
+integer o,i,r,c;
+
+begin
+
+   $display("Loading Conv2");
+
+   for(o=0;o<8;o++)
+      for(i=0;i<4;i++)
+         for(r=0;r<3;r++)
+            for(c=0;c<3;c++)
+               load_word(
+                  $rtoi(kernel_2_re[o][i][r][c]*R2I_COEF),
+                  1
+               );
+
+   for(o=0;o<8;o++)
+      load_word(
+         $rtoi(conv_2_bias_re[o]*R2I_COEF),
+         1
+      );
+
+end
+
+endtask
+
+task automatic load_all_weights();
+
+begin
+
+   load_conv1();
+   load_conv2();
+   load_fc1();
+   load_fc2();
+
+   $display("All CNN Weights Loaded");
+    $display("Total weights loaded = %0d", weight_count);
+end
+
+endtask
+
+initial begin
+   vif.clk = 0;
+   forever #5 vif.clk = ~vif.clk;
+end
+initial begin
+
+   t = new(vif);
+
+   vif.rst_n = 0;
+
+   repeat(5) @(posedge vif.clk);
+
+   vif.rst_n = 1;
+
+   repeat(5) @(posedge vif.clk);
+
+   load_all_weights();
+
+   $display("Weights loaded successfully");
+
+   t.run();
+
+end
+  task automatic load_fc1();
+
+integer o,i;
+
+begin
+
+   $display("Loading FC1");
+
+   for(o=0;o<64;o++)
+      for(i=0;i<200;i++)
+         load_word(
+            $rtoi(fc1_weights_re[o][i] * R2I_COEF),
+            2
+         );
+
+   for(o=0;o<64;o++)
+      load_word(
+         $rtoi(fc1_bias_re[o] * R2I_COEF),
+         2
+      );
+
+   $display("FC1 Loaded");
+
+end
+
+endtask
+task automatic load_fc2();
+
+integer o,i;
+
+begin
+
+   $display("Loading FC2");
+
+   for(o=0;o<10;o++)
+      for(i=0;i<64;i++)
+         load_word(
+            $rtoi(fc2_weights_re[o][i] * R2I_COEF),
+            3
+         );
+
+   for(o=0;o<10;o++)
+      load_word(
+         $rtoi(fc2_bias_re[o] * R2I_COEF),
+         3
+      );
+
+   $display("FC2 Loaded");
+
+end
+
+endtask
+
    
   initial begin
+wait(t.env.scb.total_count == 10);
 
-   wait(t.env.scb.total_count == 10);
-
+if(t.env.scb.fail_count == 0)
    $display("TEST PASSED");
-   $finish;
+else
+   $display("TEST FAILED");
 
+$display("Pass=%0d Fail=%0d",
+          t.env.scb.pass_count,
+          t.env.scb.fail_count);
+
+$finish;
 end
 
 endmodule
-
-
-
