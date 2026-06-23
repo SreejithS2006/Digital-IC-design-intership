@@ -60,7 +60,9 @@ This repository contains the assignments and work completed during my Digital IC
 - [APB Design](day8/APB_PROTOCOL/DESIGN/)
 - [APB Testbench](day8/APB_PROTOCOL/Testbench)
 
+## Final Internship Project
 
+- [CNN Accelerator Design & Verification](./CNN_project/)
 
 ## Author
 
