@@ -77,6 +77,12 @@ Produces the final predicted class.
                                 +-------------+
 ```
 
+
+<img width="1083" height="659" alt="image" src="https://github.com/user-attachments/assets/9ddf2a37-c81a-44ee-a205-05ae251e1a8e" />
+
+
+
+
 ### Components
 
 #### Transaction Class
@@ -162,6 +168,14 @@ Observed signals during simulation:
 
 The waveform confirms proper execution of the CNN pipeline.
 
+
+
+<img width="1600" height="1027" alt="image" src="https://github.com/user-attachments/assets/70e87378-b82c-4ac5-aa89-0a9b6f2140d8" />
+
+
+<img width="1600" height="1017" alt="image" src="https://github.com/user-attachments/assets/5f4139d2-4ed6-4b16-b941-2afb62a0cadf" />
+
+
 ---
 
 ## Classification Results
@@ -201,6 +215,17 @@ Result:
 PASS
 ```
 
+
+
+
+
+<img width="1600" height="903" alt="image" src="https://github.com/user-attachments/assets/05a0e2fa-ca57-4f4d-803d-032c106f9fb1" />
+
+
+
+
+<img width="1419" height="802" alt="image" src="https://github.com/user-attachments/assets/3b6c686b-164a-4444-aa58-9bec7e4d538c" />
+
 ---
 
 ## Verification Summary
@@ -229,6 +254,13 @@ The synthesized RTL schematic contains:
 - Status Register
 
 The RTL view confirms successful integration of all CNN processing blocks.
+
+
+
+
+
+
+<img width="1600" height="717" alt="image" src="https://github.com/user-attachments/assets/3182e747-1e92-4b64-8606-36f48c4d0870" />
 
 ---
 
